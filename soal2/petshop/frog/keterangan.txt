@@ -1,4 +1,0 @@
-nama	: limey
-umur	: 3
-
-

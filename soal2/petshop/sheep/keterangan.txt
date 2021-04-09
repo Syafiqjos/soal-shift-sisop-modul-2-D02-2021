@@ -1,4 +1,0 @@
-nama	: tilly
-umur	: 2
-
-

@@ -1,4 +1,0 @@
-nama	: nova
-umur	: 11
-
-

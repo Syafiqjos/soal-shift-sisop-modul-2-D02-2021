@@ -1,8 +1,0 @@
-nama	: otis
-umur	: 7
-
-
-nama	: lulu
-umur	: 5
-
-
