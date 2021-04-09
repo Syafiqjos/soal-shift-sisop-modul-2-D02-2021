@@ -1,0 +1,80 @@
+nama	: simba
+umur	: 4
+
+
+nama	: luna
+umur	: 4
+
+
+nama	: sus
+umur	: 6
+
+
+nama	: koda
+umur	: 11
+
+
+nama	: oreo
+umur	: 7
+
+
+nama	: chester
+umur	: 5
+
+
+nama	: reggie
+umur	: 8
+
+
+nama	: tilly
+umur	: 6
+
+
+nama	: neko
+umur	: 3
+
+
+nama	: remi
+umur	: 8
+
+
+nama	: ellie
+umur	: 3
+
+
+nama	: chloe
+umur	: 4
+
+
+nama	: atlas
+umur	: 0.6
+
+
+nama	: nala
+umur	: 4
+
+
+nama	: angmry
+umur	: 7
+
+
+nama	: echo
+umur	: 7
+
+
+nama	: ava
+umur	: 6
+
+
+nama	: milo
+umur	: 0.5
+
+
+nama	: tucker
+umur	: 3
+
+
+nama	: jasper
+umur	: 10
+
+

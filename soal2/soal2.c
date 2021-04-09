@@ -6,7 +6,7 @@
 #include <dirent.h>
 #include <string.h>
 
-char *isi_ket;
+//char *isi_ket;
 
 void unzip(char *path){
 	pid_t child_id=fork ();
@@ -39,6 +39,16 @@ void del_folder(char *path){
     }
 }
 
+void make_ket(char *filename, char *isi_ket){
+	FILE *file = fopen(filename, "a");
+
+	if (file){
+		fprintf(file, "%s\n", isi_ket);
+		fclose(file);
+	}
+
+}
+
 void make_dir(char *path){
 	pid_t child_id=fork ();
 	if (child_id==0){
@@ -69,16 +79,6 @@ void del_file(char *path){
     }
 }
 
-void make_ket(char *filename){
-	FILE *file = fopen(filename, "w");
-
-	if (file){
-		fprintf(file, "%s\n", isi_ket);
-		fclose(file);
-	}
-
-}
-
 void copy_file(char *source, char *destination){
 	pid_t child_id=fork ();
 	if (child_id==0){
@@ -106,17 +106,25 @@ int split_string(char *original, char *filename){
     char *path = malloc(64*sizeof(char));
     sprintf(path, "./petshop/%s", jenis);
 
-    make_dir(path);
+	char *isi_ket = malloc(64*sizeof(char));
+    isi_ket[0] = 0;
+ 	sprintf(isi_ket, "nama\t: %s\numur\t: %s\n\n", nama, usia);
+
+	char *path2 = malloc(64*sizeof(char));
+	sprintf(path2, "./petshop/%s/keterangan.txt", jenis);
+
+	make_dir(path);
+	make_ket(path2, isi_ket);
 
     char *namafile = malloc(64*sizeof(char));
     sprintf(namafile, "./petshop/%s/%s.jpg", jenis,nama);
-
-    sprintf(isi_ket+strlen(isi_ket), "nama\t: %s\numur\t: %s\n\n", nama, usia);
 
     copy_file(original, namafile);
     //printf("%s\n", path);
     free(path);
 	free(namafile);
+	free(isi_ket);
+	free(path2);
 }
 
 int read_file(){
@@ -155,8 +163,8 @@ int read_file(){
 }
 
 int main(){
-    isi_ket = malloc(10000*sizeof(char));
-    isi_ket[0] = 0;
+    // isi_ket = malloc(10000*sizeof(char));
+    // isi_ket[0] = 0;
     unzip("pets.zip");
 	del_folder("apex_cheats/");
 	del_folder("musics/");
@@ -164,6 +172,6 @@ int main(){
     //printf("success\n");
 	make_dir("petshop");
 	read_file();
-    make_ket("keterangan.txt");
-    free(isi_ket);
+    //make_ket("keterangan.txt");
+    //free(isi_ket);
 }

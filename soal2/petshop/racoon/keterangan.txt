@@ -1,0 +1,4 @@
+nama	: bandit
+umur	: 5
+
+

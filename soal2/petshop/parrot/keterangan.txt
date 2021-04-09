@@ -1,0 +1,12 @@
+nama	: poppy
+umur	: 2
+
+
+nama	: scrout
+umur	: 6
+
+
+nama	: cody
+umur	: 5
+
+

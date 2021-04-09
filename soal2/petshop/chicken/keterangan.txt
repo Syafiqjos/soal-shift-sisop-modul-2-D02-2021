@@ -1,0 +1,4 @@
+nama	: cocock
+umur	: 4
+
+

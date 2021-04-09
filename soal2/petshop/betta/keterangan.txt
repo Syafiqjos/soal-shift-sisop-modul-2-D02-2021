@@ -1,0 +1,4 @@
+nama	: bella
+umur	: 0.6
+
+

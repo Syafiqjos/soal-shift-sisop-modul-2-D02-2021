@@ -1,0 +1,4 @@
+nama	: rosie
+umur	: 2
+
+

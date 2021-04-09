@@ -1,0 +1,4 @@
+nama	: xena
+umur	: 4
+
+
