@@ -27,6 +27,7 @@ void del_folder(char *path){
 		execl("/usr/bin/rm", //rm = remove
 	      "/usr/bin/rm",
 	      "-r", //delete recursive, jadi dir dan isinya
+		  "-d", 
 		  path, //delete folder
 	      NULL);
 	}
@@ -42,6 +43,7 @@ void make_dir(char *path){
 		//printf(" -> %s\n", path);
 		execl("/usr/bin/mkdir", 
 	      "/usr/bin/mkdir",
+		  "-p",
 	      path,
 	      NULL);
 	}
@@ -72,8 +74,9 @@ int split_string(){
 			char *path = malloc(64*sizeof(char));
 			sprintf(path, "./petshop/%s", jenis);
 
-			//make_dir(path);
-			printf("%s\n", path);
+			make_dir(path);
+
+			//printf("%s\n", path);
 			free(path);
 			//printf( " %s\n", jenis);
 			// printf( " %s\n", nama);
@@ -91,11 +94,13 @@ int split_string(){
 //rm -r */
 
 int main(){
-    //unzip("pets.zip");
-	// del_folder("apex_cheats/");
-	// del_folder("musics/");
-	// del_folder("unimportant_files/");
-    // //printf("success\n");
+    unzip("pets.zip");
+	del_folder("apex_cheats/");
+	del_folder("musics/");
+	del_folder("unimportant_files/");
+    //printf("success\n");
+	make_dir("petshop");
 	split_string();
+
 	//make_folder();
 }
