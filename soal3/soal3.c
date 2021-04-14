@@ -16,6 +16,7 @@ void make_directory(char *path){
 
 // NOMOR B (Download image)
 void download_image(char *url, char *path){
+	printf("Downloading -> %s into -> %s\n", url, path);
 	execl("/usr/bin/wget", 
 	      "/usr/bin/wget",
 	      url,
@@ -75,6 +76,7 @@ char *get_current_formatted_time(){
 // First Child Forked Process
 void make_date_directory_and_download_photos(){
 	char *filename = get_current_formatted_time();
+	printf("%s\n", filename);
 
 	pid_t child_id = fork();
 
@@ -83,11 +85,10 @@ void make_date_directory_and_download_photos(){
 		make_directory(filename);
 	}
 
-	char *url = "https://picsum.photos/";
-	sprintf(url + strlen(url), "%d\0", (int)time(NULL) % 1000);
-	strcat(url, "/200");
+	char *url = malloc(64 * sizeof(char));
 
-	printf("%s\n", url);
+	int dt = (int)time(NULL) % 1000;
+	sprintf(url, "https://picsum.photos/%d/50", dt);
 
 	run_timer_download_photos(5, url, filename);
 
@@ -110,8 +111,9 @@ void call_timer_download_photo_update(char *url, char *path){
 	pid_t child_id = fork();
 	// if child then..
 	if (child_id == 0) {
-		char *path = strcat(path, strcat("/", get_current_formatted_time()));
-		download_image(url, path);
+		char *p = malloc(64 * sizeof(char));
+		sprintf(p, "%s/%s.jpg", path, get_current_formatted_time());
+		download_image(url, p);
 		free(path);
 		exit(0);
 	}
@@ -119,7 +121,7 @@ void call_timer_download_photo_update(char *url, char *path){
 
 // NOMOR A (Timer to check wheter 40 seconds has passed)
 void run_timer(int delta_time, int mode){
-	int current_delta_time = delta_time;
+	int current_delta_time = 0;
 
 	time_t prev_time = time(NULL);
 	time_t now_time = time(NULL);
@@ -140,7 +142,7 @@ void run_timer(int delta_time, int mode){
 
 // NOMOR B (Timer to check wheter 5 seconds has passed)
 void run_timer_download_photos(int delta_time, char *url, char *path){
-	int current_delta_time = delta_time;
+	int current_delta_time = 0;
 
 	time_t prev_time = time(NULL);
 	time_t now_time = time(NULL);
@@ -158,7 +160,7 @@ void run_timer_download_photos(int delta_time, char *url, char *path){
 			prev_time = now_time;
 			call_timer_download_photo_update(url, path);
 
-			if (count_many_times >= how_many_times){
+			if (count_many_times > how_many_times){
 				break;
 			}
 			count_many_times++;
@@ -175,7 +177,7 @@ int main(int argc, char *argv[]){
 	// Jika ada argumen yang diberikan
 	mode = get_mode(argc, argv);
 
-	run_timer(2, mode);
+	run_timer(40, mode);
 
 	return 0;
 }
