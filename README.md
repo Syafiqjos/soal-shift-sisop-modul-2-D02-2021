@@ -48,14 +48,23 @@ Terdapat seorang yang bernama Ranora, dia disuruh pembimbingnya untuk membuat pr
 #### Source Code
 ![image](https://user-images.githubusercontent.com/16128257/114743585-04ac4580-9d77-11eb-8ea5-b55533ba009c.png)
 
-![image](https://user-images.githubusercontent.com/16128257/114743671-18f04280-9d77-11eb-828a-c49c701661da.png)
+![image](https://user-images.githubusercontent.com/16128257/114744180-9d42c580-9d77-11eb-95d9-462d68c164ac.png)
 
 ![image](https://user-images.githubusercontent.com/16128257/114743840-42a96980-9d77-11eb-9662-e4a66c042f3a.png)
 
 ![image](https://user-images.githubusercontent.com/16128257/114743891-4ccb6800-9d77-11eb-9ed2-5b64f3e46c64.png)
 
 #### Cara Pengerjaan
+1. Setelah step terakhir pada 3A, kita masih berada pada child process.
+2. Kita menggunakan timer yang sama seperti 3A, tetapi diubah pemanggilannya yaitu setiap 5 detik selama 10 kali, fungsi ini kami beri nama `run_timer_download_photos()`.
+3. Untuk setiap 5 detik dari timer ini, kita akan download gambar menggunakan fungsi `call_timer_download_photo_update()` yang didalammnya terdapat pembuatan process dengan `fork()`, process yang di forked ini digunakan untuk melakukan download gambar, agak process child saat ini tidak terganggu.
+4. Untuk melakukan download gambar, kita manfaatkan fungsi `execl()` dengan membuat fungsi baru `download_image()`. Kita memanfaatkan `wget` untuk mendownload gambar dengan url yang diberikan dan akan disimpan ke direktori sebelumnya, dengan nama file yang didapat dari fungsi `get_current_formatted_time()`.
+5. Gambar didownload dari web berikut https://picsum.photos/, berdasarkan dokumentasi web tersebut, kita dapat mendownload gambar dengan ukuran yang kita inginkan. Untuk mendownload gambar persegi dengan ukuran 100x100 px, maka kita akan gunakan url berikut https://picsum.photos/100/100. Ukuran yang lain dapat menyesuaikan.
+6. Ukuran gambar didapat dengan cara memanfaatkan fungsi `time(NULL)` sehingga didapat timestamp linux, yang di modulus 1000 dan dijumlah dengan 50. Sehingga minimal adalah 50x50 px dan maximal adalah 1050x1050px.
+
 #### Kendala
+1. Karena `char[]` tidak bisa dikembalikan pada suatu fungsi karena bersifal local. Maka untuk mengembalikan string atau char* dari fungsi kita menggunakan malloc() yang dapat di free saat string tersebut selesai digunakan untuk membersihkan string tersebut dari memory.
+2. Untuk menggunakan https://picsum.photos/, kita membaca dokumentasi sebentar untuk mengetahui cara penggunaanya.
 
 ### 3C. Some
 #### Source Code
