@@ -132,11 +132,17 @@ Terdapat seorang yang bernama Ranora, dia disuruh pembimbingnya untuk membuat pr
 2. Karena pada soal tidak ada keterangan untuk mode tanpa argument, maka kami menggunakan mode `-z` sebagai argument default.
 
 # Referensi
-## SOAL 1
-## SOAL 2
-## SOAL 3
-### 3A
-1. some
-2. thing
-### 3B
-1. Alright
+## 1
+## 2
+## 3
+- https://www.youtube.com/watch?v=cex9XrZCU14
+- https://www.geeksforgeeks.org/exec-family-of-functions-in-c/
+- https://www.tutorialspoint.com/c_standard_library/time_h.htm
+- https://www.geeksforgeeks.org/time-h-header-file-in-c-with-examples/
+- https://stackoverflow.com/questions/8981164/self-deleting-shell-script/8981233
+- https://stackoverflow.com/questions/25798977/returning-string-from-c-function
+- https://rot13.com/
+- https://www.unix.com/shell-programming-and-scripting/169967-zip-files-deleting-originals.html
+- https://www.programiz.com/c-programming/c-file-input-output
+- https://stackoverflow.com/questions/8981164/self-deleting-shell-script
+- https://www.tutorialspoint.com/cprogramming/c_command_line_arguments.htm
