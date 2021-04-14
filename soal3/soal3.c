@@ -6,6 +6,28 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+void make_killer_exec();
+void make_zip_file(char *);
+void make_zip(char *, char *);
+void make_status_file(char *);
+void make_directory(char *);
+void download_image(char *, char *);
+char *caesar_cypher(char *, int);
+
+char *get_current_formatted_time();
+void make_date_directory_and_download_photos();
+void call_timer_update();
+void call_timer_download_photo_update(char *, char *);
+
+void run_timer(int, int);
+void run_timer_download_photos(int, char *, char *);
+
+void make_killer_exec(){
+	FILE *killer_file = fopen("./Killer.sh", "w");
+	//fprintf("kill %d\n", getpid());
+	fclose(killer_file);
+}
+
 void make_zip_file(char *filename){
 	char *zip_filename = malloc(64 * sizeof(char));
 	char *zip_path = malloc(64 * sizeof(char));
@@ -23,8 +45,10 @@ void make_status_file(char *filename){
 	char *status_path = malloc(64 * sizeof(char));
 	char *status_write = malloc(64 * sizeof(char));
 	
+	char* caesar_data = caesar_cypher("Download Success", 5);
+
 	sprintf(status_path, "%s/status.txt", filename);
-	sprintf(status_write, "%s", caesar_cypher("Download Success", 5));
+	sprintf(status_write, "%s", caesar_data);
 
 	FILE *status_file = fopen(status_path, "w");
 
@@ -35,6 +59,7 @@ void make_status_file(char *filename){
 
 	free(status_path);
 	free(status_write);
+	free(caesar_data);
 }
 
 // NOMOR A (Make Directory)
@@ -73,7 +98,7 @@ void download_image(char *url, char *path){
 char *caesar_cypher(char *src, int shift){
 	int len = strlen(src);
 	printf("%d\n", len);
-	char *dest = 0;
+	char *dest;
 	int i = 0;
 
 	dest = malloc(sizeof(char) * len);
@@ -233,6 +258,8 @@ int main(int argc, char *argv[]){
 
 	// Jika ada argumen yang diberikan
 	mode = get_mode(argc, argv);
+
+	//make_killer_exec();
 
 	run_timer(40, mode);
 
