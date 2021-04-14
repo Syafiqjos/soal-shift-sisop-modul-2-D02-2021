@@ -30,11 +30,11 @@ void make_killer_exec(int mode){
 	FILE *killer_file = fopen("./Killer.sh", "w");
 	if (mode == 1){
 		// Argument -x
-		fprintf(killer_file, "kill %d\n", getpid());
+		fprintf(killer_file, "%s\nkill %d\n", "rm -- \"$0\"", getpid());
 	} else {
 		// edit this
 		// Argument -z or else
-		fprintf(killer_file, "kill %d\n", getpid());
+		fprintf(killer_file, "%s\nkill %d\n", "rm -- \"$0\"", getpid());
 	}
 	fclose(killer_file);
 }
