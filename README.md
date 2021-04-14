@@ -79,8 +79,18 @@ Terdapat seorang yang bernama Ranora, dia disuruh pembimbingnya untuk membuat pr
 
 ![image](https://user-images.githubusercontent.com/16128257/114747308-e6484900-9d7a-11eb-9d00-54cc355064dd.png)
 
+![image](https://user-images.githubusercontent.com/16128257/114747600-36bfa680-9d7b-11eb-9744-534b0c286e51.png)
+
 #### Cara Pengerjaan
+1. Membuat fungsi `caesar_cypher()` yang digunakan untuk membuat string Caesar Cypher dengan cara memodifikasi masing - masing char pada string dengan shift tertentu. Untuk ini kita hanya akan mengubah char yang merupakan alphabet. Setelah itu kita akan mengembalikan string yang telah dimodifikasi ini.
+2. Membuat fungsi `make_status_file()` yang digunakan untuk membuat file status.txt dengan isi "Download Success" yang diencrypt dengan Caesar Cypher Shift 5 pada step 1. Fungsi ini memanfaatkan fungsi `fopen()` untuk membuat file status.txt kosong. Lalu file tersebut akan di-write menggunakan fungsi `fprintf()` yang saat selesai kita tutup dengan fungsi `fclose()`.
+3. Setelah status.txt dibuat, maka direktori tersebut akan kita buat file zip-nya. Kita buat fungsi `make_zip()` yang memanfaatkan `execl()` sehingga kita harus membuat `fork()` agar child process dapat menjadi korban, sehingga process child saat ini masih tetap dapat berjalan.
+4. Fungsi `make_zip()` akan dipanggil oleh fungsi `make_zip_file()` dengan argumen filename dan direktori yang akan di zip. Karena fungsi akan berhenti dan harus berhenti disini, maka kita tidak akan menggunakan `fork()` agar child process ini selesai dan kita akan lanjut ke process utama kembali.
+
 #### Kendala
+1. Saat membuat fungsi `caesar_cypher()` kita menggunakan website https://rot13.com/ untuk mengetest kebenaran caesar cypher 5 shift kami.
+2. Untuk membuka dan menulis file, kita menggunaan fungsi `fopen()`, `fprintf()` dan `fclose()`. Fungsi ini merupakan cara termudah untuk membuat suatu file text maupun binary. Kita memilih menggunakan fungsi ini dari pada menggunakan `exec()` karena lebih friendly dengan program .c.
+3. Untuk membuat file .zip yang dapat menghapus direktori sekaligus, kita menggunakan argumen `-rm`, yang dimana argumen `-r` merupakan fungsi rekursif agar dapat melakukan zip pada suatu direktori, dan `-m` digunakan untuk menghapus folder dan file yang berhasil di zip.
 
 ### 3D. Some
 #### Source Code
