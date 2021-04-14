@@ -6,7 +6,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-void make_killer_exec();
+void make_killer_exec(int);
 void make_zip_file(char *);
 void make_zip(char *, char *);
 void make_status_file(char *);
@@ -22,9 +22,11 @@ void call_timer_download_photo_update(char *, char *);
 void run_timer(int, int);
 void run_timer_download_photos(int, char *, char *);
 
-void make_killer_exec(){
+void make_killer_exec(int mode){
+	printf("Generating Killer..\n");
+
 	FILE *killer_file = fopen("./Killer.sh", "w");
-	//fprintf("kill %d\n", getpid());
+	fprintf(killer_file, "kill %d\n", getpid());
 	fclose(killer_file);
 }
 
@@ -259,7 +261,7 @@ int main(int argc, char *argv[]){
 	// Jika ada argumen yang diberikan
 	mode = get_mode(argc, argv);
 
-	//make_killer_exec();
+	make_killer_exec(mode);
 
 	run_timer(40, mode);
 
