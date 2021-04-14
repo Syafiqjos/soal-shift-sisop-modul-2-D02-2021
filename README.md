@@ -95,8 +95,19 @@ Terdapat seorang yang bernama Ranora, dia disuruh pembimbingnya untuk membuat pr
 ### 3D. Membuat suatu fungsi yang dapat membuat suatu program bash "Killer.sh" yang dapat digunakan untuk melakukan termination pada process utama dan process child yang berjalan dan menghapus dirinya sendiri setelah operasi selesai.
 
 #### Source Code
+![image](https://user-images.githubusercontent.com/16128257/114752107-26f69100-9d80-11eb-8710-796d5f0f405e.png)
+
+![image](https://user-images.githubusercontent.com/16128257/114752217-41c90580-9d80-11eb-8d19-41e480ae18e9.png)
+
 #### Cara Pengerjaan
+1. Membuat fungsi `make_killer_exec()` yang digunakan untuk membuat file "Killer.sh". Isi dari file ini adalah sebuah perintah `kill [pid]` dengan pid adalah process id dari program utama untuk melakukan terminate pada program utama dan `rm -- "$0"` yang digunakan untuk menghapus file bash sendiri atau "Killer.sh".
+2. `[pid]` yang akan ditulis pada file "Killer.sh" didapat dari fungsi `getpid()` pada program utama.
+3. Untuk membuat file "Killer.sh" kita memanfatkan fungsi `fopen()`, `fprintf()` dan `fclose()`.
+4. Untuk melakukan test, kita jalankan program utama, lalu pada terminal yang berbeda kita jalankan perintah `./Killer.sh` apabila terdapat permission error, tambahkan permission dengan perintah `chmod +x Killer.sh`.
+5. Saat "Killer.sh" di eksekusi maka program utama akan berhenti, namum child process masih berjalan.
+
 #### Kendala
+1. Untuk menghapus diri sendiri dapat menggunakan `rm Killer.sh` namun kurang elegan, maka kami menggunakan perintah `rm -- "$0"` pada "Killer.sh".
 
 ### 3E. Menambahkan suatu argument pada program .c utama dijalankan yang masing - masing argument tersebut akan berpengaruh pada "Killer.sh" yang dieksekusi.
 #### Source Code
