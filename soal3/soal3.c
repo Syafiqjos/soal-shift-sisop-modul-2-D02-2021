@@ -6,6 +6,37 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+void make_zip_file(char *filename){
+	char *zip_filename = malloc(64 * sizeof(char));
+	char *zip_path = malloc(64 * sizeof(char));
+
+	sprintf(zip_filename, "%s.zip" ,filename);
+	sprintf(zip_path, "./%s" ,filename);
+
+	make_zip(zip_filename, zip_path);
+
+	free(zip_filename);
+	free(zip_path);
+}
+
+void make_status_file(char *filename){
+	char *status_path = malloc(64 * sizeof(char));
+	char *status_write = malloc(64 * sizeof(char));
+	
+	sprintf(status_path, "%s/status.txt", filename);
+	sprintf(status_write, "%s", caesar_cypher("Download Success", 5));
+
+	FILE *status_file = fopen(status_path, "w");
+
+	if (status_file){
+		fprintf(status_file, "%s\n", status_write);
+		fclose(status_file);
+	}
+
+	free(status_path);
+	free(status_write);
+}
+
 // NOMOR A (Make Directory)
 void make_directory(char *path){
 	printf("Creating Directory -> %s\n", path);
@@ -103,32 +134,17 @@ void make_date_directory_and_download_photos(){
 	int dt = (int)time(NULL) % 1000;
 	sprintf(url, "https://picsum.photos/%d/50", dt);
 
-	printf("TIMER START\n");
-	run_timer_download_photos(5, url, filename);
-	printf("TIMER END\n");
-
-	char *status_path = malloc(64 * sizeof(char));
-	char *status_write = malloc(64 * sizeof(char));
+	printf("DOWNLOAD PHOTOS BATCH HAS STARTED\n");
 	
-	sprintf(status_path, "%s/status.txt", filename);
-	sprintf(status_write, "%s\n", caesar_cypher("Download Success", 5));
+	run_timer_download_photos(5, url, filename);
+	
+	printf("DOWNLOAD PHOTOS BATCH HAS ENDED\n");
 
-	// TODO : write file status.txt
-
-	char *zip_filename = malloc(64 * sizeof(char));
-	char *zip_path = malloc(64 * sizeof(char));
-
-	sprintf(zip_filename, "%s.zip" ,filename);
-	sprintf(zip_path, "./%s" ,filename);
-
-	make_zip(zip_filename, zip_path);
+	make_status_file(filename);
+	make_zip_file(filename);
 
 	free(url);
 	free(filename);
-	free(status_path);
-	free(status_write);
-	free(zip_filename);
-	free(zip_path);
 
 	exit(0);
 }
