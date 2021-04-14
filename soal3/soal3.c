@@ -7,6 +7,7 @@
 #include <unistd.h>
 
 void make_killer_exec(int);
+void append_killer_exec(int);
 void make_zip_file(char *);
 void make_zip(char *, char *);
 void make_status_file(char *);
@@ -15,8 +16,8 @@ void download_image(char *, char *);
 char *caesar_cypher(char *, int);
 
 char *get_current_formatted_time();
-void make_date_directory_and_download_photos();
-void call_timer_update();
+void make_date_directory_and_download_photos(int);
+void call_timer_update(int);
 void call_timer_download_photo_update(char *, char *);
 
 void run_timer(int, int);
@@ -30,10 +31,21 @@ void make_killer_exec(int mode){
 		// Argument -x
 		fprintf(killer_file, "kill %d\n", getpid());
 	} else {
+		// edit this
 		// Argument -z or else
 		fprintf(killer_file, "kill %d\n", getpid());
 	}
 	fclose(killer_file);
+}
+
+void append_killer_exec(int mode){
+	if (mode != 1) {
+		printf("Append more process to kill..\n");
+		FILE *killer_file = fopen("./Killer.sh", "a");
+		fprintf(killer_file, "kill %d\n", getpid());
+
+		fclose(killer_file);
+	}
 }
 
 void make_zip_file(char *filename){
@@ -151,7 +163,9 @@ char *get_current_formatted_time(){
 
 // NOMOR A (Make Date Directory and Download Photos)
 // First Level Child Forked Process
-void make_date_directory_and_download_photos(){
+void make_date_directory_and_download_photos(int mode){
+	append_killer_exec(mode);
+
 	char *filename = get_current_formatted_time();
 	printf("%s\n", filename);
 
@@ -183,11 +197,11 @@ void make_date_directory_and_download_photos(){
 }
 
 // NOMOR A (Refresh Update every 40 seconds)
-void call_timer_update(){
+void call_timer_update(int mode){
 	pid_t child_id = fork();
 	// if child then..
 	if (child_id == 0) {
-		make_date_directory_and_download_photos();
+		make_date_directory_and_download_photos(mode);
 		exit(0);
 	}
 }
@@ -222,7 +236,7 @@ void run_timer(int delta_time, int mode){
 		current_delta_time = (int) difftime(now_time, prev_time);
 		if (current_delta_time >= delta_time || first){
 			prev_time = now_time;
-			call_timer_update();
+			call_timer_update(mode);
 			first = false;
 		}
 	}
@@ -248,14 +262,16 @@ void run_timer_download_photos(int delta_time, char *url, char *path){
 		current_delta_time = (int) difftime(now_time, prev_time);
 		if (current_delta_time >= delta_time || first){
 			prev_time = now_time;
-			call_timer_download_photo_update(url, path);
+
+			if (count_many_times > how_many_times){
+				is_running = false;
+				break;
+			}
 
 			count_many_times++;
 			first = false;
 
-			if (count_many_times >= how_many_times){
-				is_running = false;
-			}
+			call_timer_download_photo_update(url, path);
 		}
 	}
 }
