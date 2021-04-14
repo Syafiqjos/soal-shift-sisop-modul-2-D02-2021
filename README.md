@@ -21,6 +21,7 @@
 Terdapat seorang yang bernama Ranora, dia disuruh pembimbingnya untuk membuat program .c yang dapat mendownload batch gambar setiap 40 detik. Pada setiap batch tersebut, batch akan mendownload 1 gambar setiap 5 detik hingga 10 kali. Jika batch tersebut berhasil mendownload 10 gambar, maka gambar - gambar tersebut akan dijadikan dalam satu file .zip dengan format nama tertentu. Selanjutnya Ranora diperintahkan untuk membuat suatu executable shell dengan nama Killer.sh yang digunakan untuk menghentikan proses program .c yang dibuat sebelumnya. Namun Killer.sh ini bekerja sesuai dengan argumen saat menjalankan program .c, dan masing - masing argumen tersebut memiliki sifat masing - masing.
 
 ### 3A. Membuat sebuah fungsi sebagai timer yang dapat membuat direktori dengan format tertentu setiap 40 detik sekali.
+
 #### Source Code
 ![image](https://user-images.githubusercontent.com/16128257/114737660-6ff31900-9d71-11eb-8511-49196f9a6e84.png)
 
@@ -45,6 +46,7 @@ Terdapat seorang yang bernama Ranora, dia disuruh pembimbingnya untuk membuat pr
 3. Untuk menggunakan time di program .c kita menggunakan library `time.h`, dan mencari sumber cara implementasinya di internet.
 
 ### 3B. Membuat process yang dapat mendownload 1 gambar setiap 5 detik sebanyak 10 kali. Gambar - gambar ini akan di simpan pada direktori yang telah dibuat sebelumnya dengan nama file dengan format tertentu. 
+
 #### Source Code
 ![image](https://user-images.githubusercontent.com/16128257/114743585-04ac4580-9d77-11eb-8ea5-b55533ba009c.png)
 
@@ -63,11 +65,20 @@ Terdapat seorang yang bernama Ranora, dia disuruh pembimbingnya untuk membuat pr
 6. Ukuran gambar didapat dengan cara memanfaatkan fungsi `time(NULL)` sehingga didapat timestamp linux, yang di modulus 1000 dan dijumlah dengan 50. Sehingga minimal adalah 50x50 px dan maximal adalah 1050x1050px.
 
 #### Kendala
-1. Karena `char[]` tidak bisa dikembalikan pada suatu fungsi karena bersifal local. Maka untuk mengembalikan string atau char* dari fungsi kita menggunakan malloc() yang dapat di free saat string tersebut selesai digunakan untuk membersihkan string tersebut dari memory.
-2. Untuk menggunakan https://picsum.photos/, kita membaca dokumentasi sebentar untuk mengetahui cara penggunaanya.
+1. Karena `char[]` tidak bisa dikembalikan pada suatu fungsi karena bersifal local. Maka untuk mengembalikan string atau char* dari fungsi kita menggunakan `malloc()` yang dapat di `free()` saat string tersebut selesai digunakan untuk membersihkan string tersebut dari memory.
+2. Untuk memahami cara kerja https://picsum.photos/, kita membaca dokumentasi sebentar untuk mengetahui cara penggunaanya.
 
-### 3C. Some
+### 3C. Membuat fungsi yang dapat menyimpan suatu file status.txt pada direktori sebelumnya yang berisi pesan “Download Success” yang di-encrypt menggunakan Caesar Cypher 5 Shift. Setelah 10 gambar .jpg dan satu file status.txt berhasil disimpan pada direktori, selanjutnya adalah menyimpan seluruh file pada direktori ini pada suatu file .zip dan menghapus seluruh isi direktori dan direktori itu sendiri.
+
 #### Source Code
+![image](https://user-images.githubusercontent.com/16128257/114747171-c022a900-9d7a-11eb-9fa5-37d917b40b19.png)
+
+![image](https://user-images.githubusercontent.com/16128257/114747211-cca70180-9d7a-11eb-9e57-0976d4f9a0ae.png)
+
+![image](https://user-images.githubusercontent.com/16128257/114747253-d4ff3c80-9d7a-11eb-88a5-33d3a1bd6a26.png)
+
+![image](https://user-images.githubusercontent.com/16128257/114747308-e6484900-9d7a-11eb-9d00-54cc355064dd.png)
+
 #### Cara Pengerjaan
 #### Kendala
 
