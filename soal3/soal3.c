@@ -23,6 +23,7 @@ void call_timer_download_photo_update(char *, char *);
 void run_timer(int, int);
 void run_timer_download_photos(int, char *, char *);
 
+// NOMOR E (Create / Overwrite new Killer file)
 void make_killer_exec(int mode){
 	printf("Generating Killer..\n");
 
@@ -38,6 +39,7 @@ void make_killer_exec(int mode){
 	fclose(killer_file);
 }
 
+// NOMOR E (Append child process to Killer file)
 void append_killer_exec(int mode){
 	if (mode != 1) {
 		printf("Append more process to kill..\n");
@@ -48,6 +50,7 @@ void append_killer_exec(int mode){
 	}
 }
 
+// NOMOR C (Compress Directory into Zip File)
 void make_zip_file(char *filename){
 	char *zip_filename = malloc(64 * sizeof(char));
 	char *zip_path = malloc(64 * sizeof(char));
@@ -61,6 +64,7 @@ void make_zip_file(char *filename){
 	free(zip_path);
 }
 
+// NOMOR C (Create Status File with Caesar Cypher)
 void make_status_file(char *filename){
 	char *status_path = malloc(64 * sizeof(char));
 	char *status_write = malloc(64 * sizeof(char));
@@ -151,6 +155,7 @@ int get_mode(int argc, char *argv[]){
 	return 0;
 }
 
+// Get Current Time Formatted
 char *get_current_formatted_time(){
 	time_t current_time = time(NULL);
 	struct tm* ptr = localtime(&current_time);
