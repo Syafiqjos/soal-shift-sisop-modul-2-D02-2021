@@ -26,7 +26,13 @@ void make_killer_exec(int mode){
 	printf("Generating Killer..\n");
 
 	FILE *killer_file = fopen("./Killer.sh", "w");
-	fprintf(killer_file, "kill %d\n", getpid());
+	if (mode == 1){
+		// Argument -x
+		fprintf(killer_file, "kill %d\n", getpid());
+	} else {
+		// Argument -z or else
+		fprintf(killer_file, "kill %d\n", getpid());
+	}
 	fclose(killer_file);
 }
 
@@ -230,7 +236,7 @@ void run_timer_download_photos(int delta_time, char *url, char *path){
 	time_t now_time = time(NULL);
 	
 	int count_many_times = 0;
-	int how_many_times = 3;
+	int how_many_times = 10;
 
 	bool first = true;
 
