@@ -183,8 +183,8 @@ void make_date_directory_and_download_photos(int mode){
 
 	char *url = malloc(64 * sizeof(char));
 
-	int dt = (int)time(NULL) % 1000;
-	sprintf(url, "https://picsum.photos/%d/50", dt);
+	int dt = 50 + (int)time(NULL) % 1000;
+	sprintf(url, "https://picsum.photos/%d/%d", dt, dt);
 
 	printf("DOWNLOAD PHOTOS BATCH HAS STARTED\n");
 	
