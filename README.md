@@ -92,12 +92,13 @@ Terdapat seorang yang bernama Ranora, dia disuruh pembimbingnya untuk membuat pr
 2. Untuk membuka dan menulis file, kita menggunaan fungsi `fopen()`, `fprintf()` dan `fclose()`. Fungsi ini merupakan cara termudah untuk membuat suatu file text maupun binary. Kita memilih menggunakan fungsi ini dari pada menggunakan `exec()` karena lebih friendly dengan program .c.
 3. Untuk membuat file .zip yang dapat menghapus direktori sekaligus, kita menggunakan argumen `-rm`, yang dimana argumen `-r` merupakan fungsi rekursif agar dapat melakukan zip pada suatu direktori, dan `-m` digunakan untuk menghapus folder dan file yang berhasil di zip.
 
-### 3D. Some
+### 3D. Membuat suatu fungsi yang dapat membuat suatu program bash "Killer.sh" yang dapat digunakan untuk melakukan termination pada process utama dan process child yang berjalan dan menghapus dirinya sendiri setelah operasi selesai.
+
 #### Source Code
 #### Cara Pengerjaan
 #### Kendala
 
-### 3E. Some
+### 3E. Menambahkan suatu argument pada program .c utama dijalankan yang masing - masing argument tersebut akan berpengaruh pada "Killer.sh" yang dieksekusi.
 #### Source Code
 #### Cara Pengerjaan
 #### Kendala
