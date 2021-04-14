@@ -35,7 +35,7 @@ Terdapat seorang yang bernama Ranora, dia disuruh pembimbingnya untuk membuat pr
 
 #### Cara Pengerjaan
 1. Membuat fungsi untuk mengatur timer yang dapat melakukan suatu perintah setiap 40 detik sekali. Fungsi ini kita beri nama `run_timer(delta_time, mode)` yang dapat dipanggil dengan cara `run_timer(40, mode)`. Untuk mode ada pada soal Nomor 3E.
-2. Pada fungsi `run_timer(delta_time, mode)`, kita menggunkan fungsi `time(NULL)` untuk mendapatkan timestamp berupa integer detik saat ini. Kita akan membuat infinite loop dengan `while(is_running)`, dan untuk setiap iterasi kita gunakan fungsi `difftime()` untuk mendapatkan perbedaan waktu. Jika perbedaan waktu lebih atau sama dengan `delta_time` atau `40`, maka kita akan buat folder.
+2. Pada fungsi `run_timer(delta_time, mode)`, kita menggunkan fungsi `time(NULL)` untuk mendapatkan timestamp berupa integer detik saat ini. Kita akan membuat infinite loop dengan `while(is_running)`, dan untuk setiap iterasi kita gunakan fungsi `difftime()` untuk mendapatkan perbedaan waktu. Jika perbedaan waktu lebih atau sama dengan `delta_time` atau `40`, maka kita akan jalankan fungsi `call_timer_update` untuk membuat proses child untuk membuat direktori.
 3. Untuk membuat directory, kita akan menggunakan fungsi `execl()`, karena fungsi `execl()` akan mengganti proses ini sesuai dengan perintah pada `execl()`, maka kita harus membuat process children yang digunakan untuk menjalankan `execl()` ini. Untuk itu kita menggunakan `fork()` untuk membuat process child baru. Lalu setelah process child memanggil `execl()`, maka process children akan berhenti, tetapi proses parent tetap berjalan. Fungsi untuk membuat direktori kita beri nama `make_directory(path)`.
 4. Direktori yang dibuat sebelumnya mendapatkan argumen path dari fungsi `get_current_formatted_time()` yang mengembalikan sebuah string dengan timestamp format yang diinginkan. fungsi ini memanfaatkan fungsi `time()` dan `localtime()` yang kemudian waktu yang didapat akan diformat menggunakan `strftime()`.
 
@@ -44,8 +44,16 @@ Terdapat seorang yang bernama Ranora, dia disuruh pembimbingnya untuk membuat pr
 2. Saat melakuakan fork, terdapat beberapa percobaan untuk mendapatkan hasil yang diinginkan. Hasilnya kita gunakan kondisi, `if (child_id == 0)` akan melakukan perintah `execl()` yang diinginkan. Disini fungsi child fork tersebut sebagai korban, karena hanya digunakan sekali saja, sehingga process utama dapat tetap berjalan.
 3. Untuk menggunakan time di program .c kita menggunakan library `time.h`, dan mencari sumber cara implementasinya di internet.
 
-### 3B. Some
+### 3B. Membuat process yang dapat mendownload 1 gambar setiap 5 detik sebanyak 10 kali. Gambar - gambar ini akan di simpan pada direktori yang telah dibuat sebelumnya dengan nama file dengan format tertentu. 
 #### Source Code
+![image](https://user-images.githubusercontent.com/16128257/114743585-04ac4580-9d77-11eb-8ea5-b55533ba009c.png)
+
+![image](https://user-images.githubusercontent.com/16128257/114743671-18f04280-9d77-11eb-828a-c49c701661da.png)
+
+![image](https://user-images.githubusercontent.com/16128257/114743840-42a96980-9d77-11eb-9662-e4a66c042f3a.png)
+
+![image](https://user-images.githubusercontent.com/16128257/114743891-4ccb6800-9d77-11eb-9ed2-5b64f3e46c64.png)
+
 #### Cara Pengerjaan
 #### Kendala
 
