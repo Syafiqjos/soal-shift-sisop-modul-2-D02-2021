@@ -110,9 +110,26 @@ Terdapat seorang yang bernama Ranora, dia disuruh pembimbingnya untuk membuat pr
 1. Untuk menghapus diri sendiri dapat menggunakan `rm Killer.sh` namun kurang elegan, maka kami menggunakan perintah `rm -- "$0"` pada "Killer.sh".
 
 ### 3E. Menambahkan suatu argument pada program .c utama dijalankan yang masing - masing argument tersebut akan berpengaruh pada "Killer.sh" yang dieksekusi.
+
 #### Source Code
+![image](https://user-images.githubusercontent.com/16128257/114753244-7093ab80-9d81-11eb-8308-b56322d95b14.png)
+
+![image](https://user-images.githubusercontent.com/16128257/114753265-77222300-9d81-11eb-9632-08b7afa843d5.png)
+
+![image](https://user-images.githubusercontent.com/16128257/114753379-98830f00-9d81-11eb-8f80-7d9b3559b756.png)
+
 #### Cara Pengerjaan
+1. Melakukan perombakan pada bagian kode yang membutuhkan mode.
+2. Menggunakan argc dan argv untuk mendapatkan mode yang akan digunakan untuk melakuakn terminasi saat "Killer.sh" dieksekusi.
+3. Terdapat 2 mode, yaitu `-z` yang akan memberhentikan seluruh process yang ada saat "Killer.sh" dieksekusi. Lalu mode `-x` yang akan memberhentikan process utama saja, sedangkan process child akan tetap melanjutkan tugasnya (mendownload gambar hingga melakukan zip).
+4. Pada mode `-z`, untuk melakukan terminate pada semua child, maka kita harus mencatat semua pid pada process child, sehingga kita lakukan append pada "Killer.sh" yang berisi isi pid dari child process. Oleh karena itu kita menambah fungsi `append_killer_exec()` yang digunakan untuk melakukan append pada file "Killer.sh" dengan perintah `kill [pid]`, dengan `[pid]` adalah child process id.
+5. Pada mode `-x`, kita tinggal lakukan terminate pada program utama, sehingga semua child process menjadi orphan process.
+6. Untuk melakukan test, kita jalankan program utama dengan argument `-z` atau `-x`, lalu pada terminal yang berbeda kita jalankan perintah `./Killer.sh` apabila terdapat permission error, tambahkan permission dengan perintah `chmod +x Killer.sh`.
+7. Saat "Killer.sh" di eksekusi maka process akan dihentikan sesuai dengan argument yang diberikan sebelumnya.
+
 #### Kendala
+1. Menggunakan argc dan argv sebagai parameter fungsi `main()` untuk mendapatkan argument yang dijalankan pada program utama.
+2. Karena pada soal tidak ada keterangan untuk mode tanpa argument, maka kami menggunakan mode `-z` sebagai argument default.
 
 # Referensi
 ## SOAL 1
