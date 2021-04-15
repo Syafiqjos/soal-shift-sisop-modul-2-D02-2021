@@ -15,6 +15,19 @@ void make_directory(char *path){
 	}
 }
 
+void download_file(char *path){
+	pid_t child_id=fork ();
+	if (child_id==0){
+		printf("Creating Directory -> %s\n", path);
+		execl("/usr/bin/wget", 
+	      	"/usr/bin/wget",
+	      	"--no-check-certificate",
+	      	
+	      	path,
+	      	NULL);
+	      	exit (0);
+	}
+}
 int main(){
 	// no 1a
 	make_directory ("Musyik");
@@ -25,5 +38,8 @@ int main(){
 	//"foto = https://drive.google.com/file/d/1FsrAzb9B5ixooGUs0dGiBr-rC7TS9wTD/view"
 	//"musik = https://drive.google.com/file/d/1ZG8nRBRPquhYXq_sISdsVcXx5VdEgi-J/view"
 	//"film = https://drive.google.com/file/d/1ktjGgDkL0nNpY-vT7rT7O6ZI47Ke9xcp/view"
+	
+	download_file ("https://drive.google.com/file/d/1FsrAzb9B5ixooGUs0dGiBr-rC7TS9wTD/view");
+	
 	
 }
