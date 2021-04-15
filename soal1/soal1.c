@@ -22,5 +22,8 @@ int main(){
 	make_directory ("Pyoto");
 	
 	//no 2a
+	//"foto = https://drive.google.com/file/d/1FsrAzb9B5ixooGUs0dGiBr-rC7TS9wTD/view"
+	//"musik = https://drive.google.com/file/d/1ZG8nRBRPquhYXq_sISdsVcXx5VdEgi-J/view"
+	//"film = https://drive.google.com/file/d/1ktjGgDkL0nNpY-vT7rT7O6ZI47Ke9xcp/view"
 	
 }
