@@ -3,8 +3,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+#include <wait.h>
 #include <sys/types.h>
 #include <unistd.h>
+
+int global_mode = 0;
 
 void make_killer_exec(int);
 void append_killer_exec(int);
@@ -18,7 +21,7 @@ char *caesar_cypher(char *, int);
 char *get_current_formatted_time();
 void make_date_directory_and_download_photos(int);
 void call_timer_update(int);
-void call_timer_download_photo_update(char *, char *);
+void call_timer_download_photo_update(char *, char *, bool);
 
 void run_timer(int, int);
 void run_timer_download_photos(int, char *, char *);
@@ -30,11 +33,11 @@ void make_killer_exec(int mode){
 	FILE *killer_file = fopen("./Killer.sh", "w");
 	if (mode == 1){
 		// Argument -x
-		fprintf(killer_file, "%s\nkill %d\n", "rm -- \"$0\"", getpid());
+		fprintf(killer_file, "#!/bin/bash\n\n%s\nkill %d\n", "rm -- \"$0\"", getpid());
 	} else {
 		// edit this
 		// Argument -z or else
-		fprintf(killer_file, "%s\nkill %d\n", "rm -- \"$0\"", getpid());
+		fprintf(killer_file, "#!/bin/bash\n\n%s\nkill %d\n", "rm -- \"$0\"", getpid());
 	}
 	fclose(killer_file);
 }
@@ -88,22 +91,34 @@ void make_status_file(char *filename){
 
 // NOMOR A (Make Directory)
 void make_directory(char *path){
-	printf("Creating Directory -> %s\n", path);
-	execl("/bin/mkdir", 
-	      "/bin/mkdir",
-	      path,
-	      NULL);
+	pid_t child_id=fork ();
+	if (child_id==0){
+		printf("Creating Directory -> %s\n", path);
+		execl("/bin/mkdir", 
+		      "/bin/mkdir",
+		      path,
+		      NULL);
+	} else {
+		int status;
+		waitpid(child_id, &status, 0);
+	}
 }
 
 // NOMOR C (Make Zip)
 void make_zip(char *filename, char *path){
-	printf("Making Zip File -> %s from %s\n", filename, path);
-	execl("/usr/bin/zip", 
-	      "/usr/bin/zip",
-	      "-rm",
-	      filename,
-	      path,
-	      NULL);
+	pid_t child_id=fork ();
+	if (child_id==0){
+		printf("Making Zip File -> %s from %s\n", filename, path);
+		execl("/usr/bin/zip", 
+		      "/usr/bin/zip",
+		      "-rm",
+		      filename,
+		      path,
+		      NULL);
+	} else {
+		int status;
+		waitpid(child_id, &status, 0);
+	}
 }
 
 // NOMOR B (Download image)
@@ -174,12 +189,7 @@ void make_date_directory_and_download_photos(int mode){
 	char *filename = get_current_formatted_time();
 	printf("%s\n", filename);
 
-	pid_t child_id = fork();
-
-	// if child then..
-	if (child_id == 0) {
-		make_directory(filename);
-	}
+	make_directory(filename);
 
 	char *url = malloc(64 * sizeof(char));
 
@@ -212,7 +222,7 @@ void call_timer_update(int mode){
 }
 
 // NOMOR B (Refresh Update every 5 seconds)
-void call_timer_download_photo_update(char *url, char *path){
+void call_timer_download_photo_update(char *url, char *path, bool wait){
 	pid_t child_id = fork();
 	// if child then..
 	if (child_id == 0) {
@@ -221,6 +231,11 @@ void call_timer_download_photo_update(char *url, char *path){
 		download_image(url, p);
 		free(path);
 		exit(0);
+	}
+
+	if (wait && child_id != 0){ //parent and last iteration (10 downloaded image)
+		int status = 0;
+		waitpid(child_id, &status, 0);
 	}
 }
 
@@ -268,7 +283,7 @@ void run_timer_download_photos(int delta_time, char *url, char *path){
 		if (current_delta_time >= delta_time || first){
 			prev_time = now_time;
 
-			if (count_many_times > how_many_times){
+			if (count_many_times >= how_many_times){
 				is_running = false;
 				break;
 			}
@@ -276,7 +291,7 @@ void run_timer_download_photos(int delta_time, char *url, char *path){
 			count_many_times++;
 			first = false;
 
-			call_timer_download_photo_update(url, path);
+			call_timer_download_photo_update(url, path, count_many_times == how_many_times);
 		}
 	}
 }
@@ -287,6 +302,7 @@ int main(int argc, char *argv[]){
 
 	// Jika ada argumen yang diberikan
 	mode = get_mode(argc, argv);
+	global_mode = mode;
 
 	make_killer_exec(mode);
 
