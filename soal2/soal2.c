@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <wait.h>
@@ -8,13 +9,14 @@
 
 //char *isi_ket;
 
-void unzip(char *path){
+void unzip(char *source, char *destination){
 	pid_t child_id=fork ();
 	if (child_id==0){
-		//printf(" -> %s\n", path);
 		execl("/usr/bin/unzip", 
 	      "/usr/bin/unzip",
-	      path,
+	      source,
+		"-d",
+		destination,
 	      NULL);
 	}
     else{
@@ -26,8 +28,8 @@ void unzip(char *path){
 void del_folder(char *path){
 	pid_t child_id=fork ();
 	if (child_id==0){
-		execl("/usr/bin/rm", //rm = remove
-	      "/usr/bin/rm",
+		execl("/bin/rm", //rm = remove
+	      "/bin/rm",
 	      "-r", //delete recursive, jadi dir dan isinya
 		  "-d", 
 		  path, //delete folder
@@ -53,8 +55,8 @@ void make_dir(char *path){
 	pid_t child_id=fork ();
 	if (child_id==0){
 		//printf(" -> %s\n", path);
-		execl("/usr/bin/mkdir", 
-	      "/usr/bin/mkdir",
+		execl("/bin/mkdir", 
+	      "/bin/mkdir",
 		  "-p",
 	      path,
 	      NULL);
@@ -68,8 +70,8 @@ void make_dir(char *path){
 void del_file(char *path){
 	pid_t child_id=fork ();
 	if (child_id==0){
-		execl("/usr/bin/rm", //rm = remove
-	      "/usr/bin/rm",
+		execl("/bin/rm", //rm = remove
+	      "/bin/rm",
 		  path, //delete folder
 	      NULL);
 	}
@@ -83,8 +85,8 @@ void copy_file(char *source, char *destination){
 	pid_t child_id=fork ();
 	if (child_id==0){
 		//printf(" -> %s\n", path);
-		execl("/usr/bin/cp", 
-	      "/usr/bin/cp",
+		execl("/bin/cp", 
+	      "/bin/cp",
 	      source,
           destination,
 	      NULL);
@@ -130,29 +132,46 @@ int split_string(char *original, char *filename){
 int read_file(){
 	DIR *dir;
 	struct dirent *ent;
-	if ((dir = opendir (".")) != NULL) {
+	if ((dir = opendir ("./petshop")) != NULL) {
 	/* print all the files and directories within directory */
 	while ((ent = readdir (dir)) != NULL) {
-		if(strcmp(ent->d_name, ".") != 0 && strcmp(ent->d_name, "..") != 0 && strcmp(ent->d_name, "soal2") != 0 && 
-			strcmp(ent->d_name, "soal2.c") != 0 && strcmp(ent->d_name, "pets.zip") != 0 && 
-			strcmp(ent->d_name, "keterangan.txt") != 0 && strcmp(ent->d_name, "petshop") != 0){
-			//printf ("%s\n", ent->d_name);
-            char *namafile = malloc(64*sizeof(char));
-            sprintf(namafile, "%s", ent->d_name);
-            namafile[strlen(namafile)-4] = 0;
-			
-            char *hewan = strtok(namafile, "_");
-            char *hewan2 = strtok(NULL, "_");
-            //printf("%s\n", hewan);
-            if(hewan2 != NULL){
-                //printf("%s\n", hewan2);
-                split_string(ent->d_name, hewan2);
-            }
-            split_string(ent->d_name, hewan);
+		int length = strlen(ent->d_name);
 
-            del_file(ent->d_name);
+		if (strcmp(ent->d_name, ".") == 0 || strcmp(ent->d_name, "..") == 0){
+			continue;	
+		}
+		
+		char *namapath = malloc(64*sizeof(char));
+		sprintf(namapath, "petshop/%s", ent->d_name);
+
+		struct stat statbuf;
+		stat(namapath, &statbuf);
+
+		if (S_ISDIR(statbuf.st_mode)){ //https://stackoverflow.com/questions/4553012/checking-if-a-file-is-a-directory-or-just-a-file
+			//delete
+
+			    sprintf(namapath, "petshop/%s", ent->d_name);
+			del_folder(namapath);
+		}
+		else if(length >= 4 && strcmp(ent->d_name + length - 4, ".jpg") == 0){
+			    char *namafile = malloc(64*sizeof(char));
+
+			    sprintf(namafile, "%s", ent->d_name);
+			    namafile[strlen(namafile)-4] = 0;
+			
+			    char *hewan = strtok(namafile, "_");
+			    char *hewan2 = strtok(NULL, "_");
+			    //printf("%s\n", hewan);
+			    if(hewan2 != NULL){
+				//printf("%s\n", hewan2);
+				split_string(namapath, hewan2);
+			    }
+			    split_string(namapath, hewan);
+
+			    del_file(namapath);
 			free(namafile);
 		}
+		free(namapath);
 	}
 	closedir (dir);
 	} else {
@@ -163,15 +182,7 @@ int read_file(){
 }
 
 int main(){
-    // isi_ket = malloc(10000*sizeof(char));
-    // isi_ket[0] = 0;
-    unzip("pets.zip");
-	del_folder("apex_cheats/");
-	del_folder("musics/");
-	del_folder("unimportant_files/");
-    //printf("success\n");
 	make_dir("petshop");
+	unzip("pets.zip", "petshop/");
 	read_file();
-    //make_ket("keterangan.txt");
-    //free(isi_ket);
 }
