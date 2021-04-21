@@ -14,7 +14,128 @@
 - Menunggu Deadline
 
 ## Soal2
-- Menunggu Deadline
+### Tujuan
+Kita diminta untuk membantu Loba untuk memproses file yang diberikan oleh bos Loba dengan mengategorikan foto-foto yang ada dalam file zip tersebut sesuai dengan jenis hewannya. Selain itu, di setiap kategori dari jenis hewan tersebut diminta untuk membuat sebuah file yang bernama 'keterangan.txt' dan isinya berupa nama dan umur dari daftar hewan yang ada pada directory tersebut.
+
+### 2A. Mengextract zip ke dalam folder “/home/[user]/modul2/petshop”. Membedakan file dan folder, kemudian menghapus folder yang tidak dibutuhkan.
+#### Source Code
+![image](https://user-images.githubusercontent.com/62937814/115519778-b685cd80-a2b3-11eb-9c05-42e4a82772b2.png)
+![image](https://user-images.githubusercontent.com/62937814/115519829-c3a2bc80-a2b3-11eb-8988-1a3753b4dcb4.png)
+![image](https://user-images.githubusercontent.com/62937814/115519858-ca313400-a2b3-11eb-9000-a6839d397f63.png)
+![image](https://user-images.githubusercontent.com/62937814/115524227-1e3e1780-a2b8-11eb-8a21-c1c89cccc67c.png)
+![image](https://user-images.githubusercontent.com/62937814/115524807-b50ad400-a2b8-11eb-99cb-53e2b7a011f1.png)
+
+#### Cara Pengerjaan
+1. Membuat fungsi `make_dir` yang memiliki parameter `path` dengan tujuan bahwa kita membuat directory dengan nama berupa `path` tersebut. Pada pembuatannya menggunakan `"/bin/mkdir"` yang digunakan untuk membuat directory. 
+2. Membuat fungsi `unzip` dengan parameter `(source, destination)` dimana `source` ini menandakan file yang akan kita extract atau unzip dan `destination` merupakan lokasi dimana kita akan meletakkan hasil file yang telah kita extract tersebut. Pada pembuatannya menggunakan `"/bin/unzip"` yang digunakan untuk melakukan unzip pada file tersebut. `"-d"` menandakan bahwa file tersebut akan dimasukkan ke dalam sebuah directory yaitu `destination`.
+3. Setelah itu kita membuat fungsi `read_file` yang digunakan untuk membaca setiap file yang telah diextract. File yang kita baca hanyalah pada directory `"./petshop"`. Pada `if (strcmp(ent->d_name, ".") == 0 || strcmp(ent->d_name, "..") == 0)` digunakan apabila ada file yang bernama `"."` dan `".."` kita melakukan `continue`. Kemudian pada `S_ISDIR(statbuf.st_mode)` digunakan untuk mengecek apabila yang dicek adalah sebuah directory, maka kita memanggil `del_folder` untuk menghapus folder yang tidak dibutuhkan. Pada `else if(length >= 4 && strcmp(ent->d_name + length - 4, ".jpg") == 0)` akan terpenuhi apabila yang dicek merupakan file dan bertipe `.jpg` maka itu merupakan foto yang diminta untuk diproses.
+
+#### Kendala
+1. Saat memilih untuk menggunakan exec family, kami memutuskan untuk menggunakan `execl()` karena dirasa paling mudah dan paling cocok untuk digunakan.
+2. Saat melakuakan fork, terdapat beberapa percobaan untuk mendapatkan hasil yang diinginkan. Hasilnya kita gunakan kondisi, `if (child_id == 0)` akan melakukan perintah `execl()` yang diinginkan. Disini fungsi child fork tersebut sebagai korban, karena hanya digunakan sekali saja, sehingga process utama dapat tetap berjalan.
+3. Saat akan melakukan `del_folder` awalnya kami menggunakan nama folder tersebut satu-satu untuk menghapus folder. Namun akhirnya kami menggunakan `S_ISDIR(statbuf.st_mode)` untuk mengecek apakah itu merupakan folder atau bukan.
+
+### 2B. Membuat directory dalam /petshop/ dengan nama sesuai jenis yang ada pada file foto peliharaan. Contoh : “/petshop/cat”.
+#### Source Code
+![image](https://user-images.githubusercontent.com/62937814/115526515-50507900-a2ba-11eb-961e-15690f829587.png)
+![image](https://user-images.githubusercontent.com/62937814/115526586-62cab280-a2ba-11eb-847d-88c359f529ca.png)
+
+#### Cara Pengerjaan
+1. Apabila kondisi memenuhi bahwa yang sedang dicek merupakan file `.jpg` maka akan diproses.
+2. Pertama, kita akan menghapus `.jpg` pada file foto agar lebih mudah diproses untuk mengambil data pada nama file foto tersebut. Hal ini menggunakan `namafile[strlen(namafile)-4] = 0`.
+3. Kemudian kita akan memisahkan string dari file yang terdapat dua hewan pada satu file. Menggunakan fungsi `strtok` yang merupakan fungsi bawaan dari standard library c yang digunakan untuk memecah string menggunakan delimiter tertentu. Pada kondisi ini kita menggunakan delimiter `"_"` kemudian akan tersimpan nama `hewan` yang merupakan hewan pertama pada nama file tersebut dan `hewan2` yang merupakakan hewan kedua pada nama file tersebut.
+4. Setelah kita mendapatkan data `hewan` dan `hewan2` maka kita masuk ke function `split_string` dimana pada function ini akan dilakukan pemisahan string lagi menggunakan `strtok` untuk mendapatkan data `jenis`, `nama`, dan `usia` dari hewan tersebut. Setelah itu kita membuat `path` untuk menyimpan nama path dari directory yang akan dibuat dengan format `./petshop/jenis`. Setelah path didapatkan, maka kita bisa memanggil function `make_dir` yang telah kita buat sebelumnya untuk membuat directory sesuai dengan jenis tersebut.
+
+#### Kendala
+1. Saat melakukan pemisahan string menggunakan `strtok` awalnya kami membuat pada satu function yang sama untuk pemisahan `hewan` dan `hewan2` dengan pemisahan `jenis`, `nama`, dan `usia`. Namun hal ini tidak berhasil karena fungsi `strtok` menyimpan sekali yang sama sesuai yang diproses di awal. Akhirnya kami memisahkan proses tersebut pada function yang berbeda.
+
+### 3(C&D). Memindahkan foto ke folder dengan kategori yang sesuai dan di rename dengan nama peliharaan. Contoh: “/petshop/cat/joni.jpg”. Apabila dalam satu foto terdapat lebih dari satu peliharaan maka foto harus di pindah ke masing-masing kategori yang sesuai. Contoh: foto dengan nama “dog;baro;1_cat;joni;2.jpg” dipindah ke folder “/petshop/cat/joni.jpg” dan “/petshop/dog/baro.jpg”.
+
+#### Source Code
+![image](https://user-images.githubusercontent.com/62937814/115529673-4b40f900-a2bd-11eb-8d2e-cf78b8f2f235.png)
+![image](https://user-images.githubusercontent.com/62937814/115530035-9c50ed00-a2bd-11eb-91c5-c7a69d1b33bf.png)
+
+#### Cara Pengerjaan
+1. Pada function `split_string` yang telah kita buat sebelumnya, kita telah menyimpan data `jenis`, `nama`, dan `usia`. Maka kita bisa langsung memanggil function `copy_file` dengan parameter `(original, namafile)` dimana `original` merupakan path asli file tersebut yang berfungsi sebagai _source_ file yang akan dicopy, dan akan di _paste_ dengan path `./petshop/jenis/nama.jpg`. 
+2. hal ini juga berlaku dengan file yang memiliki dua hewan dalam satu file karena kita telah memanggil function `split_string` pada keduanya.
+3. Setelah dicopy, maka file tersebut bisa dihapus dari directory awalnya dengan menggunakan function `del_file` dimana argumen pada execlnya menggunakan `"/bin/rm"` yang digunakan untuk me-remove file tersebut.
+
+#### Kendala
+1. Apabila menggunakan `move file` atau `mv` maka pada file yang memiliki 2 hewan dalam satu file akan lebih susah untuk dimasukkan sesuai kategorinya karena akan berpindah ke hewan ke 2 terlebih dahulu. Oleh karena itu kita menggunakan copy file dan delete file.
+
+### 3E. Di setiap folder buatlah sebuah file "keterangan.txt" yang berisi nama dan umur semua peliharaan dalam folder tersebut.
+#### Source Code
+![image](https://user-images.githubusercontent.com/62937814/115533310-d243a080-a2c0-11eb-8460-70bcbbf0c60e.png)
+
+#### Cara Pengerjaan
+1. Pada function `split_string` yang telah kita buat sebelumnya, kita telah menyimpan data `jenis`, `nama`, dan `usia`. Kemudian kita menyimpan isi dari `keterangan.txt` pada variabel `isi_ket` sesuai format yang diminta. 
+2. Kemudian setelah isi file digenerate, maka kita bisa memanggil function `make_ket` yang berfungsi untuk membuat file `keterangan.txt` tersebut dengan salah satu parameternya adalah isi dari file tersebut.
+3. Hasil file `keterangan.txt` dari directory cat adalah:
+```
+nama	: simba
+umur	: 4
+
+nama	: luna
+umur	: 4
+
+nama	: sus
+umur	: 6
+
+nama	: koda
+umur	: 11
+
+nama	: oreo
+umur	: 7
+
+nama	: chester
+umur	: 5
+
+nama	: reggie
+umur	: 8
+
+nama	: tilly
+umur	: 6
+
+nama	: neko
+umur	: 3
+
+nama	: remi
+umur	: 8
+
+nama	: ellie
+umur	: 3
+
+nama	: chloe
+umur	: 4
+
+nama	: atlas
+umur	: 0.6
+
+nama	: nala
+umur	: 4
+
+nama	: angmry
+umur	: 7
+
+nama	: echo
+umur	: 7
+
+nama	: ava
+umur	: 6
+
+nama	: milo
+umur	: 0.5
+
+nama	: tucker
+umur	: 3
+
+nama	: jasper
+umur	: 10
+
+````
+
+#### Kendala
+Tidak terdapat kendala untuk bagian ini
 
 ## Soal3
 ### Tujuan
@@ -134,6 +255,9 @@ Terdapat seorang yang bernama Ranora, dia disuruh pembimbingnya untuk membuat pr
 # Referensi
 ## 1
 ## 2
+- https://stackoverflow.com/questions/612097/how-can-i-get-the-list-of-files-in-a-directory-using-c-or-c
+- https://stackoverflow.com/questions/4553012/checking-if-a-file-is-a-directory-or-just-a-file
+- https://www.tutorialspoint.com/c_standard_library/c_function_strtok.htm
 ## 3
 - https://www.youtube.com/watch?v=cex9XrZCU14
 - https://www.geeksforgeeks.org/exec-family-of-functions-in-c/
