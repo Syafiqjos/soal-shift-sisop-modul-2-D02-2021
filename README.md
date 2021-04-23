@@ -14,12 +14,12 @@ Dalam soal ini, kita diminta untuk membuat sebuah folder zip berisikan beragam f
 ![image](https://user-images.githubusercontent.com/81459084/115846228-e10a8e80-a44b-11eb-9ba6-0e1b130a5c2b.png)
 
 #### Cara pengerjaan 
-1.	Pertama, buat sebuah fungsi baru untuk membuat direktori/folder. Fungsi ini menggunakan pointer char \*path. Di dalam fungsi ini, kita perlu membuat fork program yang akan disimpan di variable child_id. Setelah itu, kita membuat perulangan “if” yang akan menjalankan eksekusi program pembuatan direktori di lokasi /bin/mkdir menggunakan execl. Kita juga menggunakan fungsi waitpid agar program utama tidak bertabrakan dengan program child yang di fork.
-2.	Setelah itu, di dalam main(), kita akan menjalankan fungsi make_directory tadi, dengan menggunakan nama-nama folder yang telah ditentukan.
+1.	Pertama, buat sebuah fungsi baru untuk membuat direktori/folder. Fungsi ini menggunakan pointer `char \*path`. Di dalam fungsi ini, kita perlu membuat `fork` program yang akan disimpan di variable `child_id`. Setelah itu, kita membuat perulangan dan check kondisi yang akan menjalankan eksekusi program pembuatan direktori di lokasi /bin/mkdir menggunakan `execl`. Kita juga menggunakan fungsi `waitpid` agar program utama tidak bertabrakan dengan program child yang di fork.
+2.	Setelah itu, di dalam `main()`, kita akan menjalankan fungsi `make_directory` yang telah dibuat tadi, dengan menggunakan nama-nama folder yang telah ditentukan.
 
 #### Kendala
-1. Untuk menunggu proses child hingga selesai, menggunakan fungsi waitpid pada library wait.h.
-2. Untuk membuat directory tanpa mkdir dari library c, dapat menggunakan program mkdir langsung melalui exec, dan kami memutuskan execl karena cocok digunakan.
+1. Untuk menunggu proses child hingga selesai, menggunakan fungsi `waitpid` pada library `wait.h`.
+2. Untuk membuat directory tanpa `mkdir` dari library default c, dapat menggunakan program `mkdir` langsung melalui path program dengan exec, dan kami memutuskan `execl` karena cocok digunakan.
 
 ### 1B. Mendownload file-file dari beberapa link yang telah diberikan.
 #### Source Code 
@@ -28,7 +28,7 @@ Dalam soal ini, kita diminta untuk membuat sebuah folder zip berisikan beragam f
 ![image](https://user-images.githubusercontent.com/81459084/115846372-07302e80-a44c-11eb-96f5-52db17fe55f4.png)
 
 #### Cara Pengerjaan
-1.	Sama seperti soal pertama, kita terlebih dahulu membuat sebuah fungsi baru untuk mendownload file (diberi nama download_drive). Fungsi ini menggunakan 2 pointer, yakni char \*url dan char \*path. Di dalam fungsi ini, kita pertama membuat fork yang akan disimpan di child_id. Lalu, buat perulangan “if”. Di dalam perulangan itu, kita perlu menggunakan lagi 1 pointer, yakni char \*url_new, yang didalamnya akan dialokasikan sejumlah memori seukuran 128 \* sizeof(char). Lalu, kita akan mem-print url ke dalam link yang tersedia dengan sprint dan dimasukkan ke url_new. Semua hal ini akan dieksekusi di lokasi /usr/bin/wget dengan execl. Jangan lupa membuat fungsi waitpid.
+1.	Sama seperti soal pertama, kita terlebih dahulu membuat sebuah fungsi baru untuk mendownload file (diberi nama download_drive). Fungsi ini menggunakan 2 pointer, yakni `char \*url` dan `char \*path`. Di dalam fungsi ini, kita pertama membuat fork yang akan disimpan di child_id. Lalu, buat perulangan “if”. Di dalam perulangan itu, kita perlu menggunakan lagi 1 pointer, yakni char \*url_new, yang didalamnya akan dialokasikan sejumlah memori seukuran 128 \* sizeof(char). Lalu, kita akan mem-print url ke dalam link yang tersedia dengan sprint dan dimasukkan ke url_new. Semua hal ini akan dieksekusi di lokasi /usr/bin/wget dengan execl. Jangan lupa membuat fungsi waitpid.
 2.	Lalu, di dalam main(), kita akan menjalankan fungsi download_drive sebanyak 3 kali untuk mendownload semua file yang telah terbagi menjadi 3 jenis.
 
 #### Kendala
