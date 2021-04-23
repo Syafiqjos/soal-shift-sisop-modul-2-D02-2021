@@ -331,7 +331,7 @@ Terdapat seorang yang bernama Ranora, dia disuruh pembimbingnya untuk membuat pr
 
 #### Cara Pengerjaan
 1. Melakukan perombakan pada bagian kode yang membutuhkan mode.
-2. Menggunakan argc dan argv untuk mendapatkan mode yang akan digunakan untuk melakuakn terminasi saat "Killer.sh" dieksekusi.
+2. Menggunakan `argc` dan `argv` untuk mendapatkan mode yang akan digunakan untuk melakuakn terminasi saat "Killer.sh" dieksekusi.
 3. Terdapat 2 mode, yaitu `-z` yang akan memberhentikan seluruh process yang ada saat "Killer.sh" dieksekusi. Lalu mode `-x` yang akan memberhentikan process utama saja, sedangkan process child akan tetap melanjutkan tugasnya (mendownload gambar hingga melakukan zip).
 4. Pada mode `-z`, untuk melakukan terminate pada semua child, maka kita harus mencatat semua pid pada process child, sehingga kita lakukan append pada "Killer.sh" yang berisi isi pid dari child process. Oleh karena itu kita menambah fungsi `append_killer_exec()` yang digunakan untuk melakukan append pada file "Killer.sh" dengan perintah `kill [pid]`, dengan `[pid]` adalah child process id.
 5. Pada mode `-x`, kita tinggal lakukan terminate pada program utama, sehingga semua child process menjadi orphan process.
