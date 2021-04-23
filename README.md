@@ -17,6 +17,10 @@ Dalam soal ini, kita diminta untuk membuat sebuah folder zip berisikan beragam f
 1.	Pertama, buat sebuah fungsi baru untuk membuat direktori/folder. Fungsi ini menggunakan pointer char \*path. Di dalam fungsi ini, kita perlu membuat fork program yang akan disimpan di variable child_id. Setelah itu, kita membuat perulangan “if” yang akan menjalankan eksekusi program pembuatan direktori di lokasi /bin/mkdir menggunakan execl. Kita juga menggunakan fungsi waitpid agar program utama tidak bertabrakan dengan program child yang di fork.
 2.	Setelah itu, di dalam main(), kita akan menjalankan fungsi make_directory tadi, dengan menggunakan nama-nama folder yang telah ditentukan.
 
+#### Kendala
+1. Untuk menunggu proses child hingga selesai, menggunakan fungsi waitpid pada library wait.h.
+2. Untuk membuat directory tanpa mkdir dari library c, dapat menggunakan program mkdir langsung melalui exec, dan kami memutuskan execl karena cocok digunakan.
+
 ### 1B. Mendownload file-file dari beberapa link yang telah diberikan.
 #### Source Code 
 ![image](https://user-images.githubusercontent.com/81459084/115846352-04353e00-a44c-11eb-912c-70c86a7e6a7c.png)
@@ -27,6 +31,9 @@ Dalam soal ini, kita diminta untuk membuat sebuah folder zip berisikan beragam f
 1.	Sama seperti soal pertama, kita terlebih dahulu membuat sebuah fungsi baru untuk mendownload file (diberi nama download_drive). Fungsi ini menggunakan 2 pointer, yakni char \*url dan char \*path. Di dalam fungsi ini, kita pertama membuat fork yang akan disimpan di child_id. Lalu, buat perulangan “if”. Di dalam perulangan itu, kita perlu menggunakan lagi 1 pointer, yakni char \*url_new, yang didalamnya akan dialokasikan sejumlah memori seukuran 128 \* sizeof(char). Lalu, kita akan mem-print url ke dalam link yang tersedia dengan sprint dan dimasukkan ke url_new. Semua hal ini akan dieksekusi di lokasi /usr/bin/wget dengan execl. Jangan lupa membuat fungsi waitpid.
 2.	Lalu, di dalam main(), kita akan menjalankan fungsi download_drive sebanyak 3 kali untuk mendownload semua file yang telah terbagi menjadi 3 jenis.
 
+#### Kendala
+Tidak terdapat kendala untuk bagian ini.
+
 ### 1C. Mengekstrak file-file yang telah didownload.
 #### Source Code
 ![image](https://user-images.githubusercontent.com/81459084/115846493-2cbd3800-a44c-11eb-85ff-d57a9c685e51.png)
@@ -36,6 +43,9 @@ Dalam soal ini, kita diminta untuk membuat sebuah folder zip berisikan beragam f
 #### Cara Pengerjaan
 1.	Pertama, kita membuat fungsi baru untuk mengekstrak file (diberi nama unzip), yang menggunakan pointer char \*path. Lalu buat fork dan disimpan di dalam child_id. Setelahnya, buat pengulangan “if” yang didalamnya terdapat proses eksekusi program di lokasi /usr/bin/unzip. Jangan lupa fungsi waitpid untuk mengatur waktu eksekusi program.
 2.	Lalu, jalankan fungsi “unzip” ini sebanyak 3 kali untuk 3 folder yang sebelumnya telah didownload.
+
+#### Kendala
+Tidak terdapat kendala untuk bagian ini.
 
 ### 1D. Memidahkan file-file yang telah diekstrak ke dalam 3 folder yang telah disediakan dari nomor 1A.
 #### Source Code
@@ -50,6 +60,9 @@ Dalam soal ini, kita diminta untuk membuat sebuah folder zip berisikan beragam f
 2. Fungsi kedua adalah iteration_files, yang berfungsi untuk melakukan perulangan dan melist file/folder di dalam direktori. Fungsi ini menggunakan 2 pointer, yakni char \*source dan char \*destination.  Di dalam fungsi ini, kita juga akan membuat 2 pointer baru, \*dir dan \*ent. Setelahnya, lakukan pengulangan “if” di mana direktori akan dibuka. Lalu, Ketika direkotri-direktori tersebut dibaca dengan perulangan “while”, lakukan lagi perulangan “if” yang akan membandingkan setiap string. Berikutnya, buat sebuah pointer \*path (yang memiliki ukuran 64 \* sizeof(char)). Tambahkan string dari source dan ent->d_name ke path dengan strcat. Lalu, jalankan fungsi move_files. Terakhir, tutup direktori.
 3. Jalankan fungsi iteration_files sebanyak 3 kali dan sesuai dengan jenis datanya.
 
+#### Kendala
+1. Untuk iterasi file pada suatu directory dapat menggunakan library dirent.h dan menggunakan fungsi readdir yang diletakkan pada while tidak sama dengan NULL.
+
 ### 1E. Menjalankan program pada nomor 1a hingga 1d otomatis saat 6 jam sebelum ulang tahun stevany.
 #### Source Code 
 ![image](https://user-images.githubusercontent.com/81459084/115846906-93daec80-a44c-11eb-92b2-e000d6af8062.png)
@@ -60,6 +73,9 @@ Dalam soal ini, kita diminta untuk membuat sebuah folder zip berisikan beragam f
 1.	Dalam soal ini, kita akan membuat sebuah fungsi baru dan sebuah pointer bertipe char. Pertama adalah pointernya dulu, yakni char \*get_current_formatted_time, yang berfungsi untuk memperoleh waktu saat ini. Di dalamnya, masukkan variable “current_time” yang awalnya di set NULL. Lalu, gunakan struct untuk mengumpulkan data waktu saat ini, dimana hasilnya akan dimasukkan ke dalam fungsi localtime (&current_time). Jangan lupa untuk membuat format waktu seperti yang telah diminta pada soal menggunakan strftime.
 2.	Lalu, buat fungsi baru bernama  run_timer yang berfungsi menjalankan waktu program. Fungsi ini menggunakan pointer char \*target_time. Pertama, masukkan pointer \*now_time yang ukurannya 64 \* ukuran char. Lalu, lakukan perulangan “while (is_running)”. Di dalam perulangan, samakan now_time dengan get_current_formatted_time untuk menjalankan waktu hingga waktu target. 
 3.	Jalankan fungsi “run_timer” dengan target 6 jam sebelum ultah dimulai.
+
+#### Kendala
+1. Memanfaatkan fungsi time(NULL) pada library time.h untuk melakukan while dan mengecheck jika waktu tujuan dan waktu saat ini sama, maka waktu tujuan telah tercapai dan mulai melakukan eksekusi perintah yang diinginkan.
 
 ### 1F. Menzip semua folder ke dalam 1 folder khusus yang telah diberi nama dan menghapus folder lainnya.
 #### Source Code
@@ -78,6 +94,8 @@ Dalam soal ini, kita diminta untuk membuat sebuah folder zip berisikan beragam f
 4.	Lalu, jalankan fungsi run_timer dengan waktu target dimodifikasi pada tanggal 9 April jam 22.22 WIB, yakni waktu ultah stevany.
 5.	Setelah itu, jalankan fungsi delete_files untuk menghapus semua file dan folder (kecuali folder zip untuk stevany).
 
+#### Kendala
+Tidak terdapat kendala untuk bagian ini.
 
 ## Soal2
 ### Tujuan
@@ -328,6 +346,7 @@ Terdapat seorang yang bernama Ranora, dia disuruh pembimbingnya untuk membuat pr
 ## 1
 - https://www.geeksforgeeks.org/exec-family-of-functions-in-c/
 - https://stackoverflow.com/questions/41211732/fork-and-waitpid-in-c
+- https://www.tutorialspoint.com/c_standard_library/time_h.htm
 ## 2
 - https://stackoverflow.com/questions/612097/how-can-i-get-the-list-of-files-in-a-directory-using-c-or-c
 - https://stackoverflow.com/questions/4553012/checking-if-a-file-is-a-directory-or-just-a-file
