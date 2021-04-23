@@ -10,6 +10,7 @@ Dalam soal ini, kita diminta untuk membuat sebuah folder zip berisikan beragam f
 ### 1A. Membuat beberapa folder dengan nama yang telah ditentukan.
 #### Source Code
 ![image](https://user-images.githubusercontent.com/81459084/115846188-d64ff980-a44b-11eb-89a8-c50f5f05242c.png)
+
 ![image](https://user-images.githubusercontent.com/81459084/115846228-e10a8e80-a44b-11eb-9ba6-0e1b130a5c2b.png)
 
 #### Cara pengerjaan 
@@ -19,6 +20,7 @@ Dalam soal ini, kita diminta untuk membuat sebuah folder zip berisikan beragam f
 ### 1B. Mendownload file-file dari beberapa link yang telah diberikan.
 #### Source Code 
 ![image](https://user-images.githubusercontent.com/81459084/115846352-04353e00-a44c-11eb-912c-70c86a7e6a7c.png)
+
 ![image](https://user-images.githubusercontent.com/81459084/115846372-07302e80-a44c-11eb-96f5-52db17fe55f4.png)
 
 #### Cara Pengerjaan
@@ -28,6 +30,7 @@ Dalam soal ini, kita diminta untuk membuat sebuah folder zip berisikan beragam f
 ### 1C. Mengekstrak file-file yang telah didownload.
 #### Source Code
 ![image](https://user-images.githubusercontent.com/81459084/115846493-2cbd3800-a44c-11eb-85ff-d57a9c685e51.png)
+
 ![image](https://user-images.githubusercontent.com/81459084/115846501-2e86fb80-a44c-11eb-9ba1-b4e256c87864.png)
 
 #### Cara Pengerjaan
@@ -37,7 +40,9 @@ Dalam soal ini, kita diminta untuk membuat sebuah folder zip berisikan beragam f
 ### 1D. Memidahkan file-file yang telah diekstrak ke dalam 3 folder yang telah disediakan dari nomor 1A.
 #### Source Code
 ![image](https://user-images.githubusercontent.com/81459084/115846616-4b233380-a44c-11eb-9909-09b89cae33f8.png)
+
 ![image](https://user-images.githubusercontent.com/81459084/115846630-4f4f5100-a44c-11eb-85c3-54122733703f.png)
+
 ![image](https://user-images.githubusercontent.com/81459084/115846647-54140500-a44c-11eb-95a0-c60481c026ea.png)
 
 #### Cara Pengerjaan
@@ -58,8 +63,11 @@ Dalam soal ini, kita diminta untuk membuat sebuah folder zip berisikan beragam f
 ### 1F. Menzip semua folder ke dalam 1 folder khusus yang telah diberi nama dan menghapus folder lainnya.
 #### Source Code
 ![image](https://user-images.githubusercontent.com/81459084/115847021-b4a34200-a44c-11eb-807c-9e11decc63d3.png)
+
 ![image](https://user-images.githubusercontent.com/81459084/115847034-b8cf5f80-a44c-11eb-83fc-d9a0f904982f.png)
+
 ![image](https://user-images.githubusercontent.com/81459084/115847042-bb31b980-a44c-11eb-86e9-7021dcb6b85f.png)
+
 ![image](https://user-images.githubusercontent.com/81459084/115847054-bd941380-a44c-11eb-8d9a-8f1ee354a635.png)
 
 #### Cara Pengerjaan
@@ -77,9 +85,13 @@ Kita diminta untuk membantu Loba untuk memproses file yang diberikan oleh bos Lo
 ### 2A. Mengextract zip ke dalam folder “/home/[user]/modul2/petshop”. Membedakan file dan folder, kemudian menghapus folder yang tidak dibutuhkan.
 #### Source Code
 ![image](https://user-images.githubusercontent.com/62937814/115519778-b685cd80-a2b3-11eb-9c05-42e4a82772b2.png)
+
 ![image](https://user-images.githubusercontent.com/62937814/115519829-c3a2bc80-a2b3-11eb-8988-1a3753b4dcb4.png)
+
 ![image](https://user-images.githubusercontent.com/62937814/115519858-ca313400-a2b3-11eb-9000-a6839d397f63.png)
+
 ![image](https://user-images.githubusercontent.com/62937814/115524227-1e3e1780-a2b8-11eb-8a21-c1c89cccc67c.png)
+
 ![image](https://user-images.githubusercontent.com/62937814/115524807-b50ad400-a2b8-11eb-99cb-53e2b7a011f1.png)
 
 #### Cara Pengerjaan
@@ -95,6 +107,7 @@ Kita diminta untuk membantu Loba untuk memproses file yang diberikan oleh bos Lo
 ### 2B. Membuat directory dalam /petshop/ dengan nama sesuai jenis yang ada pada file foto peliharaan. Contoh : “/petshop/cat”.
 #### Source Code
 ![image](https://user-images.githubusercontent.com/62937814/115526515-50507900-a2ba-11eb-961e-15690f829587.png)
+
 ![image](https://user-images.githubusercontent.com/62937814/115526586-62cab280-a2ba-11eb-847d-88c359f529ca.png)
 
 #### Cara Pengerjaan
@@ -110,6 +123,7 @@ Kita diminta untuk membantu Loba untuk memproses file yang diberikan oleh bos Lo
 
 #### Source Code
 ![image](https://user-images.githubusercontent.com/62937814/115529673-4b40f900-a2bd-11eb-8d2e-cf78b8f2f235.png)
+
 ![image](https://user-images.githubusercontent.com/62937814/115530035-9c50ed00-a2bd-11eb-91c5-c7a69d1b33bf.png)
 
 #### Cara Pengerjaan
