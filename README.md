@@ -11,7 +11,71 @@
 #### Kendala
 
 ## Soal1
-- Menunggu Deadline
+### Tujuan
+Dalam soal ini, kita diminta untuk membuat sebuah folder zip berisikan beragam file, mulai dari foto,film hingga musik. File-file tersebut sebelumnya perlu didownload dari beberapa link yang ada, dan dimasukkan ke sebuah folder baru secara otomatis di waktu yang telah ditentukan.
+
+### 1A. Membuat beberapa folder dengan nama yang telah ditentukan.
+#### Source Code
+![image](https://user-images.githubusercontent.com/81459084/115846188-d64ff980-a44b-11eb-89a8-c50f5f05242c.png)
+![image](https://user-images.githubusercontent.com/81459084/115846228-e10a8e80-a44b-11eb-9ba6-0e1b130a5c2b.png)
+
+#### Cara pengerjaan 
+1.	Pertama, buat sebuah fungsi baru untuk membuat direktori/folder. Fungsi ini menggunakan pointer char *path. Di dalam fungsi ini, kita perlu membuat fork program yang akan disimpan di variable child_id. Setelah itu, kita membuat perulangan “if” yang akan menjalankan eksekusi program pembuatan direktori di lokasi /bin/mkdir menggunakan execl. Kita juga menggunakan fungsi waitpid agar program tidak bertabrakan dengan program lain.
+2.	Setelah itu, di dalam main(), kita akan menjalankan fungsi make_directory tadi, dengan menggunakan nama-nama folder yang telah ditentukan.
+
+### 1B. Mendownload file-file dari beberapa link yang telah diberikan.
+#### Source Code 
+![image](https://user-images.githubusercontent.com/81459084/115846352-04353e00-a44c-11eb-912c-70c86a7e6a7c.png)
+![image](https://user-images.githubusercontent.com/81459084/115846372-07302e80-a44c-11eb-96f5-52db17fe55f4.png)
+
+#### Cara Pengerjaan
+1.	Sama seperti soal pertama, kita terlebih dahulu membuat sebuah fungsi baru untuk mendownload file (diberi nama download_drive). Fungsi ini menggunakan 2 pointer, yakni char *url dan char *path. Di dalam fungsi ini, kita pertama membuat fork yang akan disimpan di child_id. Lalu, buat perulangan “if”. Di dalam perulangan itu, kita perlu menggunakan lagi 1 pointer, yakni char *url_new, yang didalamnya akan dialokasikan sejumlah memori seukuran 128 * sizeof(char). Lalu, kita akan mem-print url ke dalam link yang tersedia dengan sprint dan dimasukkan ke url_new. Semua hal ini akan dieksekusi di lokasi /usr/bin/wget dengan execl. Jangan lupa membuat fungsi waitpid.
+2.	Lalu, di dalam main(), kita akan menjalankan fungsi download_drive sebanyak 3 kali untuk mendownload semua file yang telah terbagi menjadi 3 jenis.
+
+### 1C. Mengekstrak file-file yang telah didownload.
+#### Source Code
+![image](https://user-images.githubusercontent.com/81459084/115846493-2cbd3800-a44c-11eb-85ff-d57a9c685e51.png)
+![image](https://user-images.githubusercontent.com/81459084/115846501-2e86fb80-a44c-11eb-9ba1-b4e256c87864.png)
+
+#### Cara Pengerjaan
+1.	Pertama, kita membuat fungsi baru untuk mengekstrak file (diberi nama unzip), yang menggunakan pointer char *path. Lalu buat fork dan disimpan di dalam child_id. Setelahnya, buat pengulangan “if” yang didalamnya terdapat proses eksekusi program di lokasi /usr/bin/unzip. Jangan lupa fungsi waitpid untuk mengatur waktu eksekusi program.
+2.	Lalu, jalankan fungsi “unzip” ini sebanyak 3 kali untuk 3 folder yang sebelumnya telah didownload.
+
+### 1D. Memidahkan file-file yang telah diekstrak ke dalam 3 folder yang telah disediakan dari nomor 1A.
+#### Source Code
+![image](https://user-images.githubusercontent.com/81459084/115846616-4b233380-a44c-11eb-9909-09b89cae33f8.png)
+![image](https://user-images.githubusercontent.com/81459084/115846630-4f4f5100-a44c-11eb-85c3-54122733703f.png)
+![image](https://user-images.githubusercontent.com/81459084/115846647-54140500-a44c-11eb-95a0-c60481c026ea.png)
+
+#### Cara Pengerjaan
+1.	 	Untuk soal ini, kita harus membuat 2 fungsi baru. Fungsi pertama adalah move_files,  yang berfungsi untuk memindahkan files. Fungsi ini menggunakan pointer char *source dan char *destination. Buat fork yang akan disimpan di dalam child_id. Lalu buat pengulangan “if” , yang didalamnya akan ada eksekusi program di lokasi /usr/bin/mv. Gunakan juga fungsi waitpid.
+2.	 	Fungsi kedua adalah iteration_files, yang berfungsi untuk melakukan perulangan dan melist file/folder di dalam direktori. Fungsi ini menggunakan 2 pointer, yakni char *source dan char *destination.  Di dalam fungsi ini, kita juga akan membuat 2 pointer baru, *dir dan *ent. Setelahnya, lakukan pengulangan “if” di mana direktori akan dibuka. Lalu, Ketika direkotri-direktori tersebut dibaca dengan perulangan “while”, lakukan lagi perulangan “if” yang akan membandingkan setiap string. Berikutnya, buat sebuah pointer *path (yang memiliki ukuran 64 * sizeof(char)). Tambahkan string dari source dan ent->d_name ke path dengan strcat. Lalu, jalankan fungsi move_files. Terakhir, tutup direktori.
+3.	 	Jalankan fungsi iteration_files sebanyak 3 kali dan sesuai dengan jenis datanya.
+
+### 1E. Menjalankan program pada nomor 1a hingga 1d otomatis saat 6 jam sebelum ulang tahun stevany.
+#### Source Code 
+![image](https://user-images.githubusercontent.com/81459084/115846906-93daec80-a44c-11eb-92b2-e000d6af8062.png)
+![image](https://user-images.githubusercontent.com/81459084/115846917-963d4680-a44c-11eb-95a7-43a7dcda7b70.png)
+
+#### Cara Pengerjaan 
+1.	Dalam soal ini, kita akan membuat sebuah fungsi baru dan sebuah pointer bertipe char. Pertama adalah pointernya dulu, yakni char *get_current_formatted_time, yang berfungsi untuk memperoleh waktu saat ini. Di dalamnya, masukkan variable “current_time” yang awalnya di set NULL. Lalu, gunakan struct untuk mengumpulkan data waktu saat ini, dimana hasilnya akan dimasukkan ke dalam fungsi localtime (&current_time). Jangan lupa untuk membuat format waktu seperti yang telah diminta pada soal menggunakan strftime.
+2.	Lalu, buat fungsi baru bernama  run_timer yang berfungsi menjalankan waktu program. Fungsi ini menggunakan pointer char *target_time. Pertama, masukkan pointer *now_time yang ukurannya 64 * ukuran char. Lalu, lakukan perulangan “while (is_running)”. Di dalam perulangan, samakan now_time dengan get_current_formatted_time untuk menjalankan waktu hingga waktu target. 
+3.	Jalankan fungsi “run_timer” dengan target 6 jam sebelum ultah dimulai.
+
+### 1F. Menzip semua folder ke dalam 1 folder khusus yang telah diberi nama dan menghapus folder lainnya.
+#### Source Code
+![image](https://user-images.githubusercontent.com/81459084/115847021-b4a34200-a44c-11eb-807c-9e11decc63d3.png)
+![image](https://user-images.githubusercontent.com/81459084/115847034-b8cf5f80-a44c-11eb-83fc-d9a0f904982f.png)
+![image](https://user-images.githubusercontent.com/81459084/115847042-bb31b980-a44c-11eb-86e9-7021dcb6b85f.png)
+![image](https://user-images.githubusercontent.com/81459084/115847054-bd941380-a44c-11eb-8d9a-8f1ee354a635.png)
+
+#### Cara Pengerjaan
+1.	Untuk menyelesaikan permasalahan ini, kita akan menggunakan fungsi dan pointer pada nomor 1E dan membuat lagi 2 fungsi baru.
+2.	Fungsi pertama adalah zip_files, yang berfungsi menzip files. Fungsi ini menggunakan 4 pointer bertipe char, yakni *path, *source1, *source2, dan *source3. Hal pertama yang dilakukan adalah membuat fork dan disimpan di child_id. Lalu, lakukan perulangan “if” dan jalankan eksekusi program zip ini di lokasi zip, yakni /usr/bin/zip. Terakhir, masukkan fungsi waitpid.
+3.	Fungsi kedua adalah delete_files (menggunakan pointer char *path) yang bertujuan menghapus file. Susunan pembuatannya mirip dengan fungsi zip_files, yakni buat fork, buat perulangan “if” dan jalankan program ini di lokasi fungsi menghapus data, yakni /usr/bin/rm. Masukkan juga fungsi waitpid.
+4.	Lalu, jalankan fungsi run_timer dengan waktu target dimodifikasi pada tanggal 9 April jam 22.22 WIB, yakni waktu ultah stevany.
+5.	Setelah itu, jalankan fungsi delete_files untuk menghapus semua file dan folder (kecuali folder zip untuk stevany).
+
 
 ## Soal2
 ### Tujuan
