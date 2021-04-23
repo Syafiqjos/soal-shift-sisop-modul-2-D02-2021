@@ -53,6 +53,7 @@ Dalam soal ini, kita diminta untuk membuat sebuah folder zip berisikan beragam f
 ### 1E. Menjalankan program pada nomor 1a hingga 1d otomatis saat 6 jam sebelum ulang tahun stevany.
 #### Source Code 
 ![image](https://user-images.githubusercontent.com/81459084/115846906-93daec80-a44c-11eb-92b2-e000d6af8062.png)
+
 ![image](https://user-images.githubusercontent.com/81459084/115846917-963d4680-a44c-11eb-95a7-43a7dcda7b70.png)
 
 #### Cara Pengerjaan 
