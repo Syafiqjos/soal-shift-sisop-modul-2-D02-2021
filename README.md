@@ -97,6 +97,19 @@ Tidak terdapat kendala untuk bagian ini.
 #### Kendala
 Tidak terdapat kendala untuk bagian ini.
 
+### Hasil Output Soal1
+#### Tampilan direktori setelah compile dan run program soal1
+![image](https://user-images.githubusercontent.com/16128257/115943589-00043180-a4db-11eb-8e30-aa27097112f7.png)
+
+#### Isi zip stefany folder pertama
+![image](https://user-images.githubusercontent.com/16128257/115943611-1ca06980-a4db-11eb-948c-b98d2ded9dd5.png)
+
+#### Isi zip stefany folder kedua
+![image](https://user-images.githubusercontent.com/16128257/115943624-2f1aa300-a4db-11eb-8006-6a5436e12970.png)
+
+#### Isi zip stefany folder kedua
+![image](https://user-images.githubusercontent.com/16128257/115943635-3cd02880-a4db-11eb-986d-d02c26de605b.png)
+
 ## Soal2
 ### Tujuan
 Kita diminta untuk membantu Loba untuk memproses file yang diberikan oleh bos Loba dengan mengategorikan foto-foto yang ada dalam file zip tersebut sesuai dengan jenis hewannya. Selain itu, di setiap kategori dari jenis hewan tersebut diminta untuk membuat sebuah file yang bernama 'keterangan.txt' dan isinya berupa nama dan umur dari daftar hewan yang ada pada directory tersebut.
