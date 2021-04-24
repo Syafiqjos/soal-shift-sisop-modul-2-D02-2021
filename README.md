@@ -342,6 +342,25 @@ Terdapat seorang yang bernama Ranora, dia disuruh pembimbingnya untuk membuat pr
 1. Menggunakan argc dan argv sebagai parameter fungsi `main()` untuk mendapatkan argument yang dijalankan pada program utama.
 2. Karena pada soal tidak ada keterangan untuk mode tanpa argument, maka kami menggunakan mode `-z` sebagai argument default.
 
+### Hasil Output Soal3
+#### Tampilan awal compile dan run program soal3
+![image](https://user-images.githubusercontent.com/16128257/115943146-76536480-a4d8-11eb-920d-6346c039985b.png)
+
+#### Hasil membuat direktori, download images dan melakukan zip terhadap direktori tersebut
+![image](https://user-images.githubusercontent.com/16128257/115943177-a6026c80-a4d8-11eb-93a5-2d090dba3526.png)
+
+#### Isi lengkap salah satu direktori yang di-zip
+![image](https://user-images.githubusercontent.com/16128257/115943196-c03c4a80-a4d8-11eb-8549-a2774578e2fa.png)
+
+#### Isi dari file status.txt
+![image](https://user-images.githubusercontent.com/16128257/115943234-ebbf3500-a4d8-11eb-8107-2a1e0f2467d7.png)
+
+#### Isi dari shell Killer.sh tanpa argument dan dengan argument -z
+![image](https://user-images.githubusercontent.com/16128257/115943255-0a253080-a4d9-11eb-906f-a6b7d181b1eb.png)
+
+#### Isi dari shell Killer.sh dengan argument -x
+![image](https://user-images.githubusercontent.com/16128257/115943300-507a8f80-a4d9-11eb-8566-50e159c875cb.png)
+
 # Referensi
 ## 1
 - https://www.geeksforgeeks.org/exec-family-of-functions-in-c/
