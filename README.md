@@ -110,6 +110,9 @@ Tidak terdapat kendala untuk bagian ini.
 #### Isi zip stefany folder kedua
 ![image](https://user-images.githubusercontent.com/16128257/115943635-3cd02880-a4db-11eb-986d-d02c26de605b.png)
 
+#### Output program ketika menunggu hingga ulang tahun stevany tiba
+![image](https://user-images.githubusercontent.com/16128257/115943733-f7f8c180-a4db-11eb-8e9e-fc67b8be0533.png)
+
 ## Soal2
 ### Tujuan
 Kita diminta untuk membantu Loba untuk memproses file yang diberikan oleh bos Loba dengan mengategorikan foto-foto yang ada dalam file zip tersebut sesuai dengan jenis hewannya. Selain itu, di setiap kategori dari jenis hewan tersebut diminta untuk membuat sebuah file yang bernama 'keterangan.txt' dan isinya berupa nama dan umur dari daftar hewan yang ada pada directory tersebut.
