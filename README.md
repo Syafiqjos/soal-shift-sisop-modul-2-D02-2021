@@ -227,6 +227,23 @@ umur	: 10
 #### Kendala
 Tidak terdapat kendala untuk bagian ini
 
+### Hasil Output Soal2
+#### Tampilan awal setelah compile dan run soal2
+![image](https://user-images.githubusercontent.com/16128257/115943454-41e0a800-a4da-11eb-8ea3-13a7748f893b.png)
+
+#### Hasil membuat direktori petshop
+![image](https://user-images.githubusercontent.com/16128257/115943502-7ce2db80-a4da-11eb-8152-2e061315ce53.png)
+
+
+#### Isi direktori petshop
+![image](https://user-images.githubusercontent.com/16128257/115943482-689ede80-a4da-11eb-814b-fbd5102bf4eb.png)
+
+#### Isi direktori salah satu jenis binatang (cat)
+![image](https://user-images.githubusercontent.com/16128257/115943511-8e2be800-a4da-11eb-9e78-0d9105b82395.png)
+
+#### Isi keterangan.txt salah satu jenis binatang (cat)
+![image](https://user-images.githubusercontent.com/16128257/115943537-aa2f8980-a4da-11eb-9400-9d0cc2acd7fa.png)
+
 ## Soal3
 ### Tujuan
 Terdapat seorang yang bernama Ranora, dia disuruh pembimbingnya untuk membuat program .c yang dapat mendownload batch gambar setiap 40 detik. Pada setiap batch tersebut, batch akan mendownload 1 gambar setiap 5 detik hingga 10 kali. Jika batch tersebut berhasil mendownload 10 gambar, maka gambar - gambar tersebut akan dijadikan dalam satu file .zip dengan format nama tertentu. Selanjutnya Ranora diperintahkan untuk membuat suatu executable shell dengan nama Killer.sh yang digunakan untuk menghentikan proses program .c yang dibuat sebelumnya. Namun Killer.sh ini bekerja sesuai dengan argumen saat menjalankan program .c, dan masing - masing argumen tersebut memiliki sifat masing - masing.
